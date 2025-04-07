@@ -1,0 +1,178 @@
+/* Custom styles beyond Tailwind */
+
+/* Smooth scrolling for the whole page */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Speedometer animations and styling */
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 20px rgba(0,0,0,0.5), inset 0 0 15px rgba(59, 130, 246, 0.2); }
+    50% { box-shadow: 0 0 25px rgba(0,0,0,0.6), inset 0 0 20px rgba(59, 130, 246, 0.3); }
+    100% { box-shadow: 0 0 20px rgba(0,0,0,0.5), inset 0 0 15px rgba(59, 130, 246, 0.2); }
+}
+
+/* Speedometer styling */
+.speedometer-container {
+    transform: rotate(180deg);
+    background: radial-gradient(circle at center, rgba(0,0,0,0.8) 55%, transparent 56%);
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.speedometer-ticks {
+    background: 
+        repeating-conic-gradient(
+            from 180deg,
+            transparent 0deg 29deg,
+            rgba(255, 255, 255, 0.1) 29deg 30deg,
+            transparent 30deg 59deg,
+            rgba(255, 255, 255, 0.2) 59deg 60deg
+        );
+    border-radius: 50%;
+}
+
+.speedometer-gauge {
+    background: conic-gradient(
+        from 180deg,
+        transparent 0deg,
+        rgba(59, 130, 246, 0.2) 60deg,
+        rgba(59, 130, 246, 0.4) 120deg,
+        rgba(59, 130, 246, 0.6) 180deg,
+        rgba(59, 130, 246, 0.8) 240deg
+    );
+    border-radius: 50%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.9;
+    backdrop-filter: blur(4px);
+}
+
+.speedometer-center {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 2rem;
+    border-radius: 50%;
+    box-shadow: 
+        0 0 20px rgba(0,0,0,0.5),
+        inset 0 0 15px rgba(59, 130, 246, 0.2);
+    animation: glowPulse 2s infinite;
+    backdrop-filter: blur(4px);
+    min-width: 180px;
+}
+
+/* Fix text orientation */
+.speedometer-container {
+    transform: rotate(0deg);
+}
+
+.speedometer-gauge {
+    transform-origin: center;
+}
+
+.speedometer-ticks {
+    transform: rotate(180deg);
+}
+
+.speedometer-center {
+    transform: rotate(0deg);
+}
+
+/* Speed labels */
+.speedometer-container .absolute {
+    transform: rotate(0deg);
+}
+
+/* Speed value animations */
+.speed-updating {
+    animation: fadeInScale 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* History item hover effect */
+.history-item {
+    transition: all 0.3s ease;
+}
+
+.history-item:hover {
+    transform: translateX(5px);
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* Custom scrollbar for history */
+#history-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+#history-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+#history-list::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.5);
+    border-radius: 4px;
+}
+
+#history-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.7);
+}
+
+/* Progress spinner custom styles */
+.spinner-ring {
+    position: relative;
+}
+
+.spinner-ring::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50%;
+    animation: glowPulse 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+/* Error message fade in/out */
+#error-message {
+    transition: all 0.3s ease;
+}
+
+#error-message.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#error-message.hide {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .speedometer-container {
+        width: 200px;
+        height: 200px;
+    }
+    
+    #history {
+        margin-top: 2rem;
+    }
+}
+
+/* Dark mode optimization */
+@media (prefers-color-scheme: dark) {
+    .bg-black\/30 {
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+}
